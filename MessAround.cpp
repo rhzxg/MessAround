@@ -10,6 +10,7 @@ using namespace std;
 int main()
 {
 	bool flag = true;
+	bool firstInit = true;
 	int posLeft, posTop, width, height;
 	RECT rectpos;
 	HWND handle = FindWindow(NULL, "画中画");
@@ -31,11 +32,18 @@ int main()
 			{
 				if (!flag)
 				{
-					SetForegroundWindow(handle);
-					PostMessage(handle, WM_KEYDOWN, VK_SPACE, 0);
-					flag = true;
+					if(!firstInit)
+					{
+						SetForegroundWindow(handle);
+						PostMessage(handle, WM_KEYDOWN, VK_SPACE, 0);
+						flag = true;
+					}
+					else 
+					{
+						firstInit = false;
+					}
 				}
-				SetWindowPos(handle, HWND_NOTOPMOST, posLeft, posTop, width, height, SWP_HIDEWINDOW);
+				SetWindowPos(handle, HWND_NOTOPMOST, posLeft, posTop, width, height, SWP_SHOWWINDOW);
 			}
 			else
 			{
@@ -43,7 +51,7 @@ int main()
 				{
 					SetForegroundWindow(handle);
 					PostMessage(handle, WM_KEYDOWN, VK_SPACE, 0);
-					SetWindowPos(handle, HWND_TOPMOST, posLeft, posTop, width, height, SWP_SHOWWINDOW);
+					SetWindowPos(handle, HWND_TOPMOST, posLeft, posTop, width, height, SWP_HIDEWINDOW);
 					flag = false;
 				}
 			}
@@ -52,6 +60,7 @@ int main()
 	else
 	{
 		MessageBox(NULL, "未发现画中画窗口句柄", "提示", 0);
+		return 0;
 	}
 
 	return 0;
