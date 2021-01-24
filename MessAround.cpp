@@ -9,7 +9,8 @@ using namespace std;
 
 int main()
 {
-	bool flag = true;
+	bool pauseflag = true;
+	bool winFrontState = true;
 	bool firstInit = true;
 	int posLeft, posTop, width, height;
 	RECT rectpos;
@@ -28,31 +29,33 @@ int main()
 
 		while (true)
 		{
-			if (GetAsyncKeyState(VK_CONTROL) && 0x8000)
+			if (GetAsyncKeyState(VK_RSHIFT) && 0x8000)
 			{
-				if (!flag)
+				if (!pauseflag)
 				{
-					if(!firstInit)
+					if(!firstInit && winFrontState)
 					{
 						SetForegroundWindow(handle);
 						PostMessage(handle, WM_KEYDOWN, VK_SPACE, 0);
-						flag = true;
+						pauseflag = true;
+						SetWindowPos(handle, HWND_TOPMOST, posLeft, posTop, width, height, SWP_SHOWWINDOW);
+						winFrontState = false;
 					}
 					else 
 					{
 						firstInit = false;
 					}
 				}
-				SetWindowPos(handle, HWND_NOTOPMOST, posLeft, posTop, width, height, SWP_SHOWWINDOW);
 			}
 			else
 			{
-				if (flag)
+				if (pauseflag)
 				{
 					SetForegroundWindow(handle);
 					PostMessage(handle, WM_KEYDOWN, VK_SPACE, 0);
 					SetWindowPos(handle, HWND_TOPMOST, posLeft, posTop, width, height, SWP_HIDEWINDOW);
-					flag = false;
+					pauseflag = false;
+					winFrontState = true;
 				}
 			}
 		}
