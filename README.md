@@ -8,4 +8,5 @@ step2: 按住右Shift播放视频 松开右Shift隐藏窗口并自动暂停（�
 
 [![Download](https://img.shields.io/badge/Download-v1.2.2-green.svg)](https://github.com/CodingDogzxg/MessAround/releases/download/v1.2.2/MessAround.exe)
 
-[![Download蓝奏云镜像(推荐)](https://img.shields.io/badge/Download-v1.2.2-green.svg)](https://wwa.lanzoul.com/iDYdg01lumhc)
+蓝奏云镜像(推荐)：
+[![Download](https://img.shields.io/badge/Download-v1.2.2-green.svg)](https://wwa.lanzoul.com/iDYdg01lumhc)
